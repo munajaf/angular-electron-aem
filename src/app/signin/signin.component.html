@@ -1,0 +1,31 @@
+<div class="body">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h3>Sign in to your dashboard</h3>
+    <!-- Login -->
+    <div class="container">
+      <div>
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" formControlName="username" required>
+        <span
+          *ngIf="invalid && (loginForm.get('username')?.hasError('email') || loginForm.get('username')?.hasError('required'))"
+          class="text-danger"
+        >
+          Invalid email address
+        </span>
+      </div>
+      <div>
+        <label class="form-label">Password</label>
+        <input type="password" class="form-input" formControlName="password" required>
+        <span *ngIf="invalid && loginForm.get('password')?.hasError('required')" class="text-danger">
+          Password is required
+        </span>
+      </div>
+      <button type="submit">SIGN IN</button>
+      <span *ngIf="errors" class="p-2 text-danger">
+          {{this.errors}}
+      </span>
+    </div>
+  </form>
+</div>
+
+<loading-component *ngIf="loading"></loading-component>
